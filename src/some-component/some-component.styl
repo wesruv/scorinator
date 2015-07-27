@@ -1,0 +1,73 @@
+/*! functionality styles */
+.expandContainer.on .showContent /* JS */
+.hideContent
+    display: none
+
+.no-js .showContent:target /* No JS - separated for IE8 */
+    display: none
+
+.expandContainer.off .showContent /* JS */
+.expandContainer.on .hideContent /* JS */
+.no-js .showContent /* No JS */
+    display: inline-block
+
+.showContent:target + .hideContent /* No JS - separated for IE8 */
+    display: inline-block
+
+.expandContent
+    max-height: 0
+    position: absolute
+    overflow: hidden
+    transition: max-height, 0.3s ease
+
+.no-csstransitions .expandContent /* Old IE & IE9 */
+    max-height: none
+    display: none
+
+.expandContainer.on .expandContent /* JS */
+.showContent:target ~ .expandContent /* No JS */
+    max-height: 1000%
+    transition: max-height, 0.1s linear
+
+.no-csstransitions .expandContainer.on .expandContent /* Old IE & IE9 */
+    max-height: none
+
+.no-js.lt-ie10 .showContent:target ~ .expandContent /* IE9 No JS */
+    display: block
+
+.no-js.lt-ie9 .expandContent /* Old IE No JS */
+    display: block
+    position: relative
+    max-height: none
+
+.expandContentInner
+    transform: translate(0, -100%)
+
+.no-csstransitions .expandContentInner /* IE9 */
+    transform: translate(0, 0)
+
+.expandContainer.on .expandContentInner /* JS */
+.showContent:target ~ .expandContent > .expandContentInner /* No JS */
+    transition: all 0.3s ease
+    transform: translate(0, 0)
+
+.expandContainer.off .expandContentInner /* JS */
+.hideContent:target ~ .expandContent > .expandContentInner /* No JS */
+    transition: all 0.3s ease
+
+/*! non-functional styling */
+body
+    padding: 25px
+
+.showContent,
+.hideContent
+    border: 1px solid #ccc
+    padding: 5px
+    margin-bottom: 10px
+
+.expandContentInner
+    background: #ddd
+    display: block
+    list-style: none
+    margin: 0
+    padding: 5px

@@ -1,0 +1,43 @@
+{
+  "name": "douglas-prototype",
+  "version": "1.1.0",
+  "description": "Babel, React, System.js, Gulp, Browsersync, Mocha/Chai, ESLint, Stylus, Stylint, Rx, Autoprefixer",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "bogus": "stylint",
+    "stylint": "node node_modules/stylint/bin/stylint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Douglas Company",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^5.2.0",
+    "babel": "^5.8.3",
+    "browser-sync": "^2.8.0",
+    "chai": "^3.2.0",
+    "del": "^1.2.0",
+    "eslint-plugin-react": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-babel": "^5.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^0.15.0",
+    "gulp-flatten": "^0.1.0",
+    "gulp-flowtype": "^0.4.7",
+    "gulp-mocha": "^2.1.3",
+    "gulp-newer": "^0.5.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-shell": "^0.4.2",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-stylus": "^2.0.5",
+    "gulp-util": "^3.0.6",
+    "merge2": "^0.3.6",
+    "mocha": "^2.2.5",
+    "react": "^0.14.0-beta1",
+    "run-sequence": "^1.1.2",
+    "rx": "^2.5.3",
+    "stylint": "^1.0.9",
+    "stylint-stylish": "^1.1.1",
+    "stylus": "^0.52.0"
+  }
+}

@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/.*flow.*/.*
+.*/lib/.*
+.*/build-.*/.*
+.*gulpfile.*\.js
+.*config\.js
+
+[include]
+
+[libs]
+
+[options]
+
