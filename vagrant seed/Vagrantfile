@@ -97,9 +97,9 @@ Vagrant.configure(2) do |config|
 
     installGlobalNpmPackages() {
 
-      echo "...install NPM 3+ (testing...beta 3.1.x can't install babel or stylint globally. DAMN YOU FSEVENTS)"
-      sudo npm install -g npm@3.2.0
-      # sudo npm install -g npm@3.x-latest
+      echo "...install NPM 3+"
+      # sudo npm install -g npm@3.3.0
+      sudo npm install -g npm@3.x-latest
       
       echo "...install babel"
       sudo npm install -g babel

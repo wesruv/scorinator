@@ -13,8 +13,8 @@
     "tests"
   ],
   "dependencies": {
-    "router5": "~0.3.1",
-    "system.js": "~0.18.4",
-    "router5-react": "~0.1.0-alpha.7"
+    "router5": "~0.4.2",
+    "system.js": "~0.18.10",
+    "router5-react": "~0.1.1"
   }
 }

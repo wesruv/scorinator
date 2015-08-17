@@ -137,7 +137,6 @@ gulp.task( "dev-test-app", [ "dev-build-tests" ], () => {
  * DEV BUILD TASKS
  *****************************/
 
-/* always lint on build, unless stylint is being an asshole */
 gulp.task( "dev-build-css", () => {
 	return gulp.src( files.src.style )
 		.pipe( plumber( plumberOpts ) )

@@ -26,7 +26,7 @@ class YourMom extends React.Component {
 		return (
 			<div className="yourMom">
 				YOUR MOTHER.
-				<p>Alright, we'll get there in the end</p>
+				<p>Alright, we got there in the end, OLD BEAN</p>
 				<Link routeName = "lameo">LAME</Link>
 			</div>
 		);
