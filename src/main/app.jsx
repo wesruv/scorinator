@@ -1,11 +1,11 @@
 /*
- * @flow
+ * @flow-weak
  */
-import React 				from "react";
-import { Router5 } 			from "router5";
+import React 				from "React";
+import { Router5 } 			from "Router5";
 import { linkFactory,
-	segmentMixinFactory } 	from "router5-react";
-import BrainDump 			from "../brain-dump/brainDump";
+	segmentMixinFactory } 	from "Router5-React";
+import BrainDump 			from "../brain-dump/BrainDump";
 
 
 /* ROUTER TEST part 1*/
@@ -34,7 +34,7 @@ class YourMom extends React.Component {
 				YOUR MOTHER.
 				<p>Alright, we got there in the end, OLD BEAN</p>
 				<Link routeName = "lameo">LAME</Link>
-				<Link routeName = "braindump">BRAIN DUMP</Link>
+				<p><Link routeName = "braindump">BRAIN DUMP</Link></p>
 			</div>;
 	}
 }
@@ -45,7 +45,7 @@ class LameO extends React.Component {
 		return <div className="lameO">
 				lame.
 				<Link routeName = "yourmom">YOUR MOTHER</Link>
-				<Link routeName = "braindump">BRAIN DUMP</Link>
+				<p><Link routeName = "braindump">BRAIN DUMP</Link></p>
 			</div>;
 	}
 }

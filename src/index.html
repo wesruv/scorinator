@@ -6,11 +6,11 @@
 	<script src="./bower/system.js/dist/system.src.js"></script>
 	<script type="text/javascript">
 System.config( {
-	defaultJSExtensions: true,
-	map: {
-		dougProto: "app/main/app.js",
-		react: "node/react/react.js",
-		router5: "bower/router5/dist/amd/router5.js",
+	"defaultJSExtensions": true,
+	"map": {
+		"app": "app/main/app.js",
+		"react": "node/react/react.js",
+		"router5": "bower/router5/dist/amd/router5.js",
 		"router5-react": "bower/router5-react/dist/amd/index.js"
 	}
 } );
@@ -20,7 +20,7 @@ System.config( {
 
 <div id="app"></div>
 <script>
-System.import("dougProto");
+System.import( "app" );
 </script>
 
 <img src="media/IT-IS-ALIVE.png" alt="" />
