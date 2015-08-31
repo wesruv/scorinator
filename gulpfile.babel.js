@@ -110,9 +110,20 @@ gulp.task( "dev-export-node-libs", () => {
  * TESTING TASKS
  * ****************************/
 
+gulp.task( "lint-app-all", () => {
+	return gulp.src( files.src.app )
+		.pipe( plumber( plumberOpts ) )
+		.pipe( eslint() )
+		.pipe( eslint.format() );
+} );
+
 gulp.task( "lint-app", () => {
 	return gulp.src( files.src.app )
 		.pipe( plumber( plumberOpts ) )
+		.pipe( newer( {
+				"dest": files.dev.app,
+				"ext": ".js"
+			} ) )
 		.pipe( eslint() )
 		.pipe( eslint.format() );
 } );
