@@ -26,7 +26,7 @@ export default class Dumpling extends React.Component {
 		var childDumplingSet = this.getChildDumplingSet(),
 			editControls = this.props.editMode ? <DumplingEditControls handleDelete={ this.state.handleDelete } /> : "";
 
-		return <DumplingKnight { ...this.props } { ...this.state } dummyDumpling={ editControls }>
+		return <DumplingKnight { ...this.props } { ...this.state } editControls={ editControls }>
 				{ childDumplingSet }
 			</DumplingKnight>;
 	}

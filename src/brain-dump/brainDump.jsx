@@ -6,7 +6,7 @@ import BrainDumpKnight 	from "./BrainDumpKnight";
 import DumplingSet 		from "../dumplings/DumplingSet";
 import DumplingIntent 	from "../intents/DumplingIntents";
 import KeyboardUtils 	from "../utils/KeyboardUtils";
-import GhettoDebugger 	from "../utils/GhettoDebugger";
+import GhettoLog 		from "../utils/GhettoLog";
 
 export default class BrainDump extends React.Component {
 	constructor( props ) {
@@ -40,11 +40,12 @@ export default class BrainDump extends React.Component {
 
 	render() {
 		var state = this.state,
-			props = this.props;
+			props = this.props,
+			Debug
 		
 		return <BrainDumpKnight { ...this.state } { ...this.props }>
 				<DumplingSet editMode={ true } sort="created ascending" { ...this.state } { ...this.props } />
-				{ GhettoDebugger.log( "Brain Dump", state, props ) }
+				<GhettoLog componentName="Brain Dump" state={ state } props={ props } />
 			</BrainDumpKnight>;
 	}
 

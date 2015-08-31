@@ -8,7 +8,7 @@ export default class DumplingEditControls extends React.Component {
 		return (
 			<div className="dumpling__editControls">
 				<div className="dumpling__editControls__delete"
-					onClick={ this.props.handleDelete } />
+					onClick={ this.props.handleDelete }>DELETE! DELETE! DELEEEEEETE!</div>
 			</div>
 			);
 	}

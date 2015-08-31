@@ -76,7 +76,7 @@ DumplingKnight.propTypes = {
 	"focusFreshDumpling": React.PropTypes.func.isRequired,
 	"handleDelete": React.PropTypes.func.isRequired,
 	"editControls": React.PropTypes.oneOfType( [
-		React.PropTypes.component,
+		React.PropTypes.object,
 		React.PropTypes.string
 	] )
 };
