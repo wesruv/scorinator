@@ -17,7 +17,7 @@ export default class DumplingSet extends React.Component {
 
 	render() {
 		var dumplings = this.buildDumplingComponents(),
-			dummyDumpling = this.props.editMode === true ? DummyDumpling : "";
+			dummyDumpling = this.props.editMode === true ? <DummyDumpling /> : "";
 
 		return (
 			<DumplingSetKnight { ...this.props } { ...this.state }>

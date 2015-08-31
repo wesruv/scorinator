@@ -1,8 +1,9 @@
 /*
  * @flow-weak
  */
-import React 			from "react";
-import DumplingIntents 	from "../intents/DumplingIntents";
+import React 				from "react";
+import DumplingIntents 		from "../intents/DumplingIntents";
+import DummyDumplingKnight 	from "./DummyDumplingKnight";
 
 export default class DummyDumpling extends React.Component {
 	constructor( props ) {
