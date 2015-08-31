@@ -97,7 +97,9 @@
 		"no-ex-assign": 2,
 		"no-extra-boolean-cast": 2,
 		"no-extra-semi": 2,
-		"valid-jsdoc": 1,
+		"valid-jsdoc": [ 1, {
+				"requireReturn": false
+			} ],
 		"valid-typeof": 2,
 		"no-unexpected-multiline": 2,
 

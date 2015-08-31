@@ -2,9 +2,11 @@
  * @flow-weak
  */
 import Rx 				from "rx";
+import React 			from "react";
 import DumplingIntents 	from "../intents/DumplingIntents";
 
-var subject = new Rx.ReplaySubject( 1 ),
+var update = React.addons.update,
+	subject = new Rx.ReplaySubject( 1 ),
 	state = {
 		"dumplings": [
 			{
@@ -31,13 +33,11 @@ var subject = new Rx.ReplaySubject( 1 ),
 	};
 
 function getNewId() {
-	var highest = state.reduce( function reduceToHighestPlusOne( prevHighest, current ) {
-		var numberForm = parseInt( current.id, 10 );
+	var highest = state.dumplings.reduce( function reduceToHighestPlusOne( prevHighest, current ) {
+		return current.id > prevHighest ? current.id : prevHighest;
+	}, 0 );
 
-		return numberForm > prevHighest ? numberForm : prevHighest;
-	} );
-
-	return ( highest + 1 ).toString();
+	return ( highest + 1 );
 }
 
 /*
@@ -46,21 +46,15 @@ function getNewId() {
 
 DumplingIntents.subjects.create.subscribe( function modelDumplingCreate( data ) {
 	var newDumpling = {
+		"id": getNewId(),
 		"created": Date.now()
 	};
 
-	newDumpling.id = getNewId();
-	data.forEach( function addEachProperty( propArray ) {
-		newDumpling[ propArray[ 0 ] ] = propArray[ 1 ];
-	} );
+	Object.assign( newDumpling, data );
 
 	state = Object.assign( {}, state, { "dumplings": state.dumplings
-		.slice( 0 )
-		.push( newDumpling )
+		.concat( newDumpling )
 	} );
-
-	console.log( `With any luck, new dumpling with has been created. Info: ${ JSON.stringify( data ) }
-		Dumplings: ${ JSON.stringify( state[ state.length - 1 ] ) }` );
 
 	subject.onNext( state );
 } );
@@ -82,13 +76,12 @@ DumplingIntents.subjects.update.subscribe( function modelDumplingUpdate( dumpDat
 } );
 
 DumplingIntents.subjects.delete.subscribe( function modelDumplingDelete( id ) {
-	state = state
+	var newDumplings = state.dumplings
 		.filter( function removeDumpling( val ) {
 			return val.id !== id;
 		} );
 
-	console.log( `dumpling "${ id }" has been deleted... hopefully.
-		Dumplings: ${ JSON.stringify( state ) }` );
+	state = Object.assign( state, { "dumplings": newDumplings } );
 
 	subject.onNext( state );
 } );

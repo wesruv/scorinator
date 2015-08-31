@@ -6,7 +6,7 @@ import React from "react";
 export default class DummyDumplingKnight extends React.Component {
 	render() {
 		return (
-			<div className="dumpling dummyDumpling">
+			<div onClick={ this.props.handleClick } className="dumpling dummyDumpling">
 				<div
 					className="dummyDumpling__text dummyDumpling__label--title"
 					>Click to create new item, or just start typing!</div>
@@ -14,3 +14,7 @@ export default class DummyDumplingKnight extends React.Component {
 		);
 	}
 }
+
+DummyDumplingKnight.propTypes = {
+	"handleClick": React.PropTypes.func.isRequired
+};

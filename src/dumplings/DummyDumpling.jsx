@@ -13,7 +13,7 @@ export default class DummyDumpling extends React.Component {
 	}
 
 	render() {
-		return <DummyDumplingKnight onClick={ this.handleClick } />;
+		return <DummyDumplingKnight handleClick={ this.handleClick } />;
 	}
 
 	/*
@@ -21,8 +21,9 @@ export default class DummyDumpling extends React.Component {
 	 */
 
 	handleClick() {
-		DumplingIntents.create( [
-			[ "fresh", true ]
-		] );
+		DumplingIntents.create(
+			{
+				"fresh": true
+			} );
 	}
 }
