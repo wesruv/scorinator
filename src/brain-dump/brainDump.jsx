@@ -28,12 +28,21 @@ export default class BrainDump extends React.Component {
 			handleNewDumpling = this.handleNewDumpling;
 
 		body.addEventListener( "keydown", function brainDumpKeydown( ev ) {
-			if ( ev.currentTarget === ev.target &&
-					KeyboardUtils.keyShouldTriggerAction( ev ) ) {
-				if ( KeyboardUtils.keyShouldPassValue( ev ) ) {
-					handleNewDumpling( ev, ev.key );
+			if ( ev.currentTarget === ev.target ) {
+				// chrome, possibly others, don't support ev.key
+				if ( ev.key ) {
+					if ( KeyboardUtils.keyShouldTriggerWithValue( ev ) ) {
+						handleNewDumpling( ev, ev.key );
+					} else {
+						if ( KeyboardUtils.keyShouldTriggerWithNoValue( ev ) ) {
+							handleNewDumpling( ev );
+						}
+					}
 				} else {
-					handleNewDumpling( ev );
+					// do non-ev.key-supporting stuff
+					if ( KeyboardUtils.keyShouldTriggerWithNoValue( ev ) ) {
+						handleNewDumpling( ev );
+					}
 				}
 			}
 		} );

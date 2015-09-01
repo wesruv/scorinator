@@ -70,7 +70,10 @@ const plumberOpts = { "errorHandler": handleError };
 
 const devServerSettings = {
 	"server": files.dev.root,
-	"port": 5000
+	"port": 5000,
+	"tunnel": true,
+	"ghostMode": false,
+	"reloadOnRestart": true
 };
 
 function exportBowerLibs( destRoot ) {
@@ -132,7 +135,7 @@ gulp.task( "dev-build-tests", () => {
 	return gulp.src( files.src.tests )
 		.pipe( plumber( plumberOpts ) )
         .pipe( sourcemaps.init() )
-        .pipe( babel() )
+        .pipe( babel( { plugins: ["object-assign"] } ) )
         .pipe( sourcemaps.write( "." ) )
         .pipe( gulp.dest( files.dev.tests ) );
 } );
@@ -175,7 +178,7 @@ gulp.task( "dev-build-app", [ "lint-app" ], () => {
 		.pipe( plumber( plumberOpts ) )
 		.pipe( newer( files.dev.app ) )
         .pipe( sourcemaps.init() )
-        .pipe( babel( /* { modules: "system" } */ ) )
+        .pipe( babel( { plugins: ["object-assign"] } /* { modules: "system" } */ ) )
         .pipe( sourcemaps.write( "." ) )
         .pipe( gulp.dest( files.dev.app ) );
 } );

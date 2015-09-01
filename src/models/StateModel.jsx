@@ -53,10 +53,6 @@ DumplingIntents.subjects.create.subscribe( function modelDumplingCreate( data ) 
 		"created": new Date( Date.now() )
 	};
 
-	if ( data.fromKeyboardEvent ) {
-
-	}
-
 	Object.assign( newDumpling, data );
 
 	state = Object.assign( {}, state, { "dumplings": state.dumplings
