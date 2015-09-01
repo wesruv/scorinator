@@ -30,14 +30,17 @@ var update = React.addons.update,
 				"fresh": false
 			}
 		]
-	};
+	},
+	highestId = 2;
 
 function getNewId() {
 	var highest = state.dumplings.reduce( function reduceToHighestPlusOne( prevHighest, current ) {
 		return current.id > prevHighest ? current.id : prevHighest;
-	}, 0 );
+	}, highestId );
 
-	return ( highest + 1 );
+	highestId = highest > highestId ? highest : highestId;
+
+	return ( ++highestId );
 }
 
 /*
@@ -47,8 +50,12 @@ function getNewId() {
 DumplingIntents.subjects.create.subscribe( function modelDumplingCreate( data ) {
 	var newDumpling = {
 		"id": getNewId(),
-		"created": Date.now()
+		"created": new Date( Date.now() )
 	};
+
+	if ( data.fromKeyboardEvent ) {
+
+	}
 
 	Object.assign( newDumpling, data );
 

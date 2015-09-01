@@ -21,27 +21,33 @@ export default class BrainDump extends React.Component {
 	 * Lifecycle Functions
 	 */
 
-	// Create a new dumpling if user starts typing outside of an input field
+	// if user starts typing with no other field or element active,
+	// 	create a new dumpling
 	componentDidMount() {
 		var body = document.querySelector( "body" ),
 			handleNewDumpling = this.handleNewDumpling;
 
-		body.addEventListener( "keyDown", function brainDumpKeydown( ev ) {
-			handleNewDumpling( ev );
+		body.addEventListener( "keydown", function brainDumpKeydown( ev ) {
+			if ( ev.currentTarget === ev.target &&
+					KeyboardUtils.keyShouldTriggerAction( ev ) ) {
+				if ( KeyboardUtils.keyShouldPassValue( ev ) ) {
+					handleNewDumpling( ev, ev.key );
+				} else {
+					handleNewDumpling( ev );
+				}
+			}
 		} );
 	}
 
 	componentWillUnmount() {
-		var body = document.querySelector( "body" ),
-			handleNewDumpling = this.handleNewDumpling;
+		var body = document.querySelector( "body" );
 
-		body.removeEventListener( "keyDown", handleNewDumpling );
+		body.removeEventListener( "keyDown", this.handleNewDumpling );
 	}
 
 	render() {
 		var state = this.state,
-			props = this.props,
-			Debug
+			props = this.props;
 		
 		return <BrainDumpKnight { ...this.state } { ...this.props }>
 				<DumplingSet editMode={ true } sort="created ascending" { ...this.state } { ...this.props } />
@@ -53,13 +59,13 @@ export default class BrainDump extends React.Component {
 	 * Event Handlers
 	 */
 
-	handleNewDumpling( ev ) {
-		var startingTitle = ( typeof ev.key === "string" ) ? KeyboardUtils.getText( ev.key ) : "";
+	handleNewDumpling( ev, key ) {
+		var startingTitle = key ? key : "";
 		
 		ev.preventDefault();
-		DumplingIntent.create( [
-			[ "fresh", true ],
-			[ "title", startingTitle ]
-		] );
+		DumplingIntent.create( {
+			"fresh": true,
+			"title": startingTitle
+		} );
 	}
 }

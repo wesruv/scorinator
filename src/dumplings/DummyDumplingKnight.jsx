@@ -9,7 +9,12 @@ export default class DummyDumplingKnight extends React.Component {
 			<div onClick={ this.props.handleClick } className="dumpling dummyDumpling">
 				<div
 					className="dummyDumpling__text dummyDumpling__label--title"
-					>Click to create new item, or just start typing!</div>
+					>Click here to create new item! As long as you're not inside another item already, you can also:
+					<ul>
+						<li>Press Enter</li>
+						<li>Just start typing!</li>
+					</ul>
+				</div>
 			</div>
 		);
 	}

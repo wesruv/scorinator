@@ -21,7 +21,7 @@ export default class Dumpling extends React.Component {
 	/*
 	 * Lifecycle Functions
 	 */
-
+	
 	render() {
 		var childDumplingSet = this.getChildDumplingSet(),
 			editControls = this.props.editMode ? <DumplingEditControls handleDelete={ this.state.handleDelete } /> : "";
@@ -66,7 +66,12 @@ export default class Dumpling extends React.Component {
 	 */
 
 	focusFreshDumpling( ref ) {
-		React.findDOMNode( ref ).focus();
+		const newDumpling = React.findDOMNode( ref );
+		const len = newDumpling.value.length;
+
+		newDumpling.focus();
+		newDumpling.setSelectionRange( len, len );
+		
 		DumplingIntents.update( this.props.id, "fresh", false );
 	}
 	
@@ -83,16 +88,16 @@ Dumpling.PropTypes = {
 	"id": React.PropTypes.string.isRequired,
 	"title": React.PropTypes.string,
 	"description": React.PropTypes.string,
+	"created": React.PropTypes.instanceOf( Date ),
 	"parent": React.PropTypes.string,
 	"zone": React.PropTypes.number,
-	"created": React.PropTypes.instanceOf( Date ),
 	"lastUpdated": React.PropTypes.instanceOf( Date ),
 	"begin": React.PropTypes.instanceOf( Date ),
 	"end": React.PropTypes.instanceOf( Date ),
 	"fresh": React.PropTypes.bool,
 
-	"potentialChildren": React.PropTypes.array,
-	"editMode": React.PropTypes.bool
+	"editMode": React.PropTypes.bool,
+	"potentialChildren": React.PropTypes.array
 };
 
 Dumpling.DefaultProps = {

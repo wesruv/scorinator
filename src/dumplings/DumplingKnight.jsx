@@ -53,7 +53,8 @@ export default class DumplingKnight extends React.Component {
 				<div className="dumpling__basicMetadata">
 					<div className="dumpling__created">Created: { this.props.created.toString() }</div>
 				</div>
-				{ this.props.children }
+				{ // child dumplings
+					this.props.children }
 			</div>
 			);
 	}
