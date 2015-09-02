@@ -9,6 +9,7 @@ export default class DumplingKnight extends React.Component {
 
 		this.updateTitle = this.updateTitle.bind( this );
 		this.updateDescription = this.updateDescription.bind( this );
+		this.updateParent = this.updateParent.bind( this );
 	}
 	
 	componentDidMount() {
@@ -20,7 +21,8 @@ export default class DumplingKnight extends React.Component {
 	render() {
 		var id = this.props.id,
 			titleId = `title_${ id }`,
-			descriptionId = `description_${ id }`;
+			descriptionId = `description_${ id }`,
+			parentId = `parent_${ id }`;
 
 		return (
 			<div className="dumpling">
@@ -49,6 +51,18 @@ export default class DumplingKnight extends React.Component {
 					value={ this.props.description }
 					onChange={ this.updateDescription }
 				></textarea>
+
+				<label
+					className="dumpling__label dumpling__label--parent"
+					htmlFor={ parentId }
+				>Parent</label>
+				<input
+					className="dumpling__parent"
+					id={ parentId }
+					ref="parent"
+					value={ this.props.parent }
+					onChange={ this.updateParent }
+				/>
 				
 				<div className="dumpling__basicMetadata">
 					<div className="dumpling__created">Created: { this.props.created.toString() }</div>
@@ -69,6 +83,10 @@ export default class DumplingKnight extends React.Component {
 
 	updateDescription() {
 		this.props.handleFieldChange( "description", this.refs.description );
+	}
+
+	updateParent() {
+		this.props.handleFieldChange( "parent", this.refs.parent );
 	}
 }
 

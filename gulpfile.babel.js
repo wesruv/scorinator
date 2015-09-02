@@ -72,7 +72,7 @@ const devServerSettings = {
 	"server": files.dev.root,
 	"port": 5000,
 	"tunnel": true,
-	"ghostMode": false,
+	//"ghostMode": false,
 	"reloadOnRestart": true
 };
 

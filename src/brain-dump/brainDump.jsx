@@ -7,6 +7,7 @@ import DumplingSet 		from "../dumplings/DumplingSet";
 import DumplingIntent 	from "../intents/DumplingIntents";
 import KeyboardUtils 	from "../utils/KeyboardUtils";
 import GhettoLog 		from "../utils/GhettoLog";
+import DummyDumpling 	from "../dumplings/DummyDumpling";
 
 export default class BrainDump extends React.Component {
 	constructor( props ) {
@@ -59,7 +60,9 @@ export default class BrainDump extends React.Component {
 			props = this.props;
 		
 		return <BrainDumpKnight { ...this.state } { ...this.props }>
-				<DumplingSet editMode={ true } sort="created ascending" { ...this.state } { ...this.props } />
+				<DumplingSet editMode={ true } sort="created descending" { ...this.state } { ...this.props }>
+					<DummyDumpling />
+				</DumplingSet>
 				<GhettoLog componentName="Brain Dump" state={ state } props={ props } />
 			</BrainDumpKnight>;
 	}

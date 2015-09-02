@@ -68,7 +68,12 @@ DumplingIntents.subjects.update.subscribe( function modelDumplingUpdate( dumpDat
 	state = Object.assign( {}, state, { "dumplings": state.dumplings
 		.map( function updateDumpling( val ) {
 			if ( val.id === id ) {
-				return Object.assign( {}, val, { [ field ]: newFieldVal } ); // eslint-disable-line quote-props
+				let newVal = Object.assign( {}, val, { [ field ]: newFieldVal } ); // eslint-disable-line quote-props
+				
+				if ( !newFieldVal ) {
+					delete newVal[ field ];
+				}
+				return newVal;
 			} else {
 				return val;
 			}

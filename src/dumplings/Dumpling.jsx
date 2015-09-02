@@ -36,10 +36,11 @@ export default class Dumpling extends React.Component {
 	 */
 	
 	getChildDumplingSet() {
-		var numChildren = this.getNumberOfChildren( this.props.potentialChildren ),
+		var numChildren = this.getNumberOfChildren( this.props.potentialChildren, this.props.id ),
 			setProps = {
 				"dumplings": this.props.potentialChildren,
-				"startingDumpling": this.props.id
+				"startingDumplingId": this.props.id,
+				"editMode": this.props.editMode
 			};
 
 		if ( numChildren ) {
@@ -76,7 +77,9 @@ export default class Dumpling extends React.Component {
 	}
 	
 	handleFieldChange( fieldName, ref ) {
-		DumplingIntents.update( this.props.id, fieldName, ref.value );
+		var newVal = fieldName === "parent" ? parseInt( ref.value ) : ref.value;
+
+		DumplingIntents.update( this.props.id, fieldName, newVal );
 	}
 
 	handleDelete() {
@@ -85,11 +88,11 @@ export default class Dumpling extends React.Component {
 }
 
 Dumpling.PropTypes = {
-	"id": React.PropTypes.string.isRequired,
+	"id": React.PropTypes.number.isRequired,
 	"title": React.PropTypes.string,
 	"description": React.PropTypes.string,
 	"created": React.PropTypes.instanceOf( Date ),
-	"parent": React.PropTypes.string,
+	"parent": React.PropTypes.number,
 	"zone": React.PropTypes.number,
 	"lastUpdated": React.PropTypes.instanceOf( Date ),
 	"begin": React.PropTypes.instanceOf( Date ),

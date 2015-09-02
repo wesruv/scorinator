@@ -4,7 +4,6 @@
 import React 				from "react";
 import DumplingSetKnight 	from "./DumplingSetKnight";
 import Dumpling 			from "./Dumpling";
-import DummyDumpling 		from "./DummyDumpling";
 
 export default class DumplingSet extends React.Component {
 	constructor( props ) {
@@ -16,12 +15,11 @@ export default class DumplingSet extends React.Component {
 	 */
 
 	render() {
-		var dumplings = this.buildDumplingComponents(),
-			dummyDumpling = this.props.editMode === true ? <DummyDumpling /> : "";
+		var dumplings = this.buildDumplingComponents();
 
 		return (
 			<DumplingSetKnight { ...this.props } { ...this.state }>
-				{ dummyDumpling }
+				{ this.props.children }
 				{ dumplings }
 			</DumplingSetKnight>
 		);
@@ -84,13 +82,32 @@ export default class DumplingSet extends React.Component {
 			return doNotSort;
 		}
 
+
 		switch ( sortByName ) {
 			case "created ascending":
 				return function sortByCreatedAscending( a, b ) {
-					if ( a > b ) {
+					var aTime = a.created.getTime(),
+						bTime = b.created.getTime();
+
+					if ( aTime > bTime ) {
+						return 1;
+					} else {
+						if ( aTime < bTime ) {
+							return -1;
+						} else {
+							return 0;
+						}
+					}
+				};
+			case "created descending":
+				return function sortByCreatedDescending( a, b ) {
+					var aTime = a.created.getTime(),
+						bTime = b.created.getTime();
+
+					if ( aTime > bTime ) {
 						return -1;
 					} else {
-						if ( a < b ) {
+						if ( aTime < bTime ) {
 							return 1;
 						} else {
 							return 0;
@@ -105,7 +122,7 @@ DumplingSet.propTypes = {
 	"dumplings": React.PropTypes.array.isRequired,
 	"editMode": React.PropTypes.bool,
 	"filter": React.PropTypes.func,
-	"startingDumplingId": React.PropTypes.string,
+	"startingDumplingId": React.PropTypes.number,
 	"nest": React.PropTypes.bool,
 	"sort": React.PropTypes.string,
 	"customSort": React.PropTypes.func
@@ -114,7 +131,6 @@ DumplingSet.propTypes = {
 DumplingSet.defaultProps = {
 	"editMode": false,
 	"filter": ( dumpling ) => { return dumpling; },
-	"startingDumplingId": "",
 	"nest": true,
 	"sort": ""
 };

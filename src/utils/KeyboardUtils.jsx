@@ -68,7 +68,7 @@ export default {
 	keyShouldTriggerWithValue( ev ) {
 		const key = ev.key;
 		const modState = ev.altKey || ev.ctrlKey || ev.metaKey;
-		const disregardKey = this.disregardKeys.indexOf( key ) === -1;
+		const disregardKey = this.disregardKeys.indexOf( key ) !== -1;
 		const noValueTriggerKey = this.noValueTriggerKeys.indexOf( key ) !== -1;
 
 		if ( modState || disregardKey || noValueTriggerKey ) {
