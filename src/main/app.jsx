@@ -37,15 +37,8 @@ const App = React.createClass( {
 	getRouteComponent( routeState, components ) {
 		var routeComponent = routeState ? components[ routeState.name.split( "." )[ 0 ] ] : <div>{ routeState.name.split( "." )[ 0 ] } is not a valid URL</div>;
 		
-		// console.log( `just retrieved components inside of getRouteComponent(). Route state: ${ JSON.stringify( routeState ) }
-		//	route component: ${ routeComponent.name }` );
-
 		return routeComponent;
 	}
-} );
-
-router.addListener( function routeChangeListener( ...argh ) {
-	console.log( `route has changed? here's the arguments:`, argh );
 } );
 
 StateModel.subject.subscribe( function onSubscribeAction( appState ) {
