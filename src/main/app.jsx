@@ -6,6 +6,7 @@ import StateModel 			from "../models/StateModel";
 import AppKing 				from "./AppKing";
 import { router,
 		 routeComponents } 	from "./routes";
+import TestNav 				from "../test-components/TestNav";
 
 const App = React.createClass( {
 
@@ -24,7 +25,7 @@ const App = React.createClass( {
 			RoutedComponent = this.getRouteComponent( routeState, routeComponents );
 
 		return (
-			<AppKing { ...this.props }>
+			<AppKing { ...this.props } TestNav={ TestNav }>
 				<RoutedComponent { ...this.props } />
 			</AppKing>
 		);
