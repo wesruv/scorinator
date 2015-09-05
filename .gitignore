@@ -1,0 +1,12 @@
+# Comments is like thises
+.vagrant
+npm-debug*
+node_modules
+sass-cache
+bower_components
+build-dev
+.git
+.DS_STORE
+scss-lint-report.xml
+.rebooted
+.sass-cache
