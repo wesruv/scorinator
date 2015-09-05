@@ -22,9 +22,11 @@ export default class TestThing extends React.Component {
 	 */
 	
 	render() {
-		var editControls = <TestThingEditControls handleDelete={ this.state.handleDelete } />;
-
-		return <TestThingKnight { ...this.props } { ...this.state } editControls={ editControls } />;
+		return (
+			<TestThingKnight { ...this.props } { ...this.state }>
+				<TestThingEditControls handleDelete={ this.state.handleDelete } />
+			</TestThingKnight>
+		);
 	}
 
 	/*
@@ -42,7 +44,7 @@ export default class TestThing extends React.Component {
 	}
 	
 	handleFieldChange( fieldName, ref ) {
-		var newVal = fieldName === "parent" ? parseInt( ref.value ) : ref.value;
+		const newVal = ref.value;
 
 		TestThingIntents.update( this.props.id, fieldName, newVal );
 	}

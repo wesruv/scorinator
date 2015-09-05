@@ -9,7 +9,6 @@ export default class TestThingKnight extends React.Component {
 
 		this.updateTitle = this.updateTitle.bind( this );
 		this.updateDescription = this.updateDescription.bind( this );
-		this.updateParent = this.updateParent.bind( this );
 	}
 	
 	componentDidMount() {

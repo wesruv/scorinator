@@ -60,7 +60,7 @@ export default class EditScreen extends React.Component {
 			props = this.props;
 		
 		return <EditScreenKnight { ...this.state } { ...this.props }>
-				<TestThingSet editMode={ true } { ...this.state } { ...this.props }>
+				<TestThingSet { ...this.state } { ...this.props }>
 					<DummyTestThing />
 				</TestThingSet>
 				<GhettoLog componentName="Edit Screen" state={ state } props={ props } />
