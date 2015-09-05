@@ -14,27 +14,27 @@ export default {
 	
 	/**
 	 * Intent to create a new Dumpling
-	 * @param {Object} data - hash of values for new dumpling
+	 * @param {Object} data - hash of values for new testThing
 	 */
-	"create": function dumplingIntentCreate( data ) {
+	"create": function testThingIntentCreate( data ) {
 		subjects.create.onNext( data );
 	},
 
 	/**
 	 * Intent to update a field of a Dumpling
-	 * @param  {Number} dumplingId [description]
+	 * @param  {Number} testThingId [description]
 	 * @param  {String} fieldName  [description]
 	 * @param  {Any} val           [description]
 	 */
-	"update": function dumplingIntentUpdate( dumplingId, fieldName, val ) {
-		subjects.update.onNext( [ dumplingId, fieldName, val ] );
+	"update": function testThingIntentUpdate( testThingId, fieldName, val ) {
+		subjects.update.onNext( [ testThingId, fieldName, val ] );
 	},
 
 	/**
 	 * Intent to delete a Dumpling
-	 * @param  {Number} dumplingId [description]
+	 * @param  {Number} testThingId [description]
 	 */
-	"delete": function dumplingIntentDelete( dumplingId ) {
-		subjects.delete.onNext( dumplingId );
+	"delete": function testThingIntentDelete( testThingId ) {
+		subjects.delete.onNext( testThingId );
 	}
 };

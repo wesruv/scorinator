@@ -8,8 +8,8 @@ export default class TempNav extends React.Component {
 	render() {
 		return (
 			<div className="tempNav">
-				<p><Link routeName = "braindump">BRAIN DUMP</Link></p>
-				<p><Link routeName = "lameo">LAME</Link></p>
+				<p><Link routeName = "edit-screen">EDIT</Link></p>
+				<p><Link routeName = "lameo">lame-o</Link></p>
 				<p><Link routeName = "yourmom">YOURMOM LOL</Link></p>
 			</div>
 		);

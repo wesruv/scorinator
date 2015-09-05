@@ -2,19 +2,19 @@
  * @flow-weak
  */
 import React 			from "react";
-import BrainDumpKnight 	from "./BrainDumpKnight";
-import DumplingSet 		from "../dumplings/DumplingSet";
-import DumplingIntent 	from "../intents/DumplingIntents";
+import EditScreenKnight 	from "./EditScreenKnight";
+import TestThingSet 		from "../testThings/TestThingSet";
+import TestThingIntent 	from "../intents/TestThingIntents";
 import KeyboardUtils 	from "../utils/KeyboardUtils";
 import GhettoLog 		from "../utils/GhettoLog";
-import DummyDumpling 	from "../dumplings/DummyDumpling";
+import DummyTestThing 	from "../testThings/DummyTestThing";
 
-export default class BrainDump extends React.Component {
+export default class EditScreen extends React.Component {
 	constructor( props ) {
 		super( props );
 
 		this.state = {
-			"handleNewDumpling": this.handleNewDumpling.bind( this )
+			"handleNewTestThing": this.handleNewTestThing.bind( this )
 		};
 	}
 
@@ -23,26 +23,26 @@ export default class BrainDump extends React.Component {
 	 */
 
 	// if user starts typing with no other field or element active,
-	// 	create a new dumpling
+	// 	create a new testThing
 	componentDidMount() {
 		var body = document.querySelector( "body" ),
-			handleNewDumpling = this.handleNewDumpling;
+			handleNewTestThing = this.handleNewTestThing;
 
-		body.addEventListener( "keydown", function brainDumpKeydown( ev ) {
+		body.addEventListener( "keydown", function editScreenKeydown( ev ) {
 			if ( ev.currentTarget === ev.target ) {
 				// chrome, possibly others, don't support ev.key
 				if ( ev.key ) {
 					if ( KeyboardUtils.keyShouldTriggerWithValue( ev ) ) {
-						handleNewDumpling( ev, ev.key );
+						handleNewTestThing( ev, ev.key );
 					} else {
 						if ( KeyboardUtils.keyShouldTriggerWithNoValue( ev ) ) {
-							handleNewDumpling( ev );
+							handleNewTestThing( ev );
 						}
 					}
 				} else {
 					// do non-ev.key-supporting stuff
 					if ( KeyboardUtils.keyShouldTriggerWithNoValue( ev ) ) {
-						handleNewDumpling( ev );
+						handleNewTestThing( ev );
 					}
 				}
 			}
@@ -52,30 +52,30 @@ export default class BrainDump extends React.Component {
 	componentWillUnmount() {
 		var body = document.querySelector( "body" );
 
-		body.removeEventListener( "keyDown", this.handleNewDumpling );
+		body.removeEventListener( "keyDown", this.handleNewTestThing );
 	}
 
 	render() {
 		var state = this.state,
 			props = this.props;
 		
-		return <BrainDumpKnight { ...this.state } { ...this.props }>
-				<DumplingSet editMode={ true } sort="created descending" { ...this.state } { ...this.props }>
-					<DummyDumpling />
-				</DumplingSet>
-				<GhettoLog componentName="Brain Dump" state={ state } props={ props } />
-			</BrainDumpKnight>;
+		return <EditScreenKnight { ...this.state } { ...this.props }>
+				<TestThingSet editMode={ true } { ...this.state } { ...this.props }>
+					<DummyTestThing />
+				</TestThingSet>
+				<GhettoLog componentName="Edit Screen" state={ state } props={ props } />
+			</EditScreenKnight>;
 	}
 
 	/*
 	 * Event Handlers
 	 */
 
-	handleNewDumpling( ev, key ) {
+	handleNewTestThing( ev, key ) {
 		var startingTitle = key ? key : "";
 		
 		ev.preventDefault();
-		DumplingIntent.create( {
+		TestThingIntent.create( {
 			"fresh": true,
 			"title": startingTitle
 		} );

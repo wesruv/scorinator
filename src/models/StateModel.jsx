@@ -2,13 +2,11 @@
  * @flow-weak
  */
 import Rx 				from "rx";
-import React 			from "react";
-import DumplingIntents 	from "../intents/DumplingIntents";
+import TestThingIntents 		from "../intents/TestThingIntents";
 
-var update = React.addons.update,
-	subject = new Rx.ReplaySubject( 1 ),
+var subject = new Rx.ReplaySubject( 1 ),
 	state = {
-		"dumplings": [
+		"testThings": [
 			{
 				"id": 0,
 				"title": "Do a thing!",
@@ -34,7 +32,7 @@ var update = React.addons.update,
 	highestId = 2;
 
 function getNewId() {
-	var highest = state.dumplings.reduce( function reduceToHighestPlusOne( prevHighest, current ) {
+	var highest = state.testThings.reduce( function reduceToHighestPlusOne( prevHighest, current ) {
 		return current.id > prevHighest ? current.id : prevHighest;
 	}, highestId );
 
@@ -44,31 +42,31 @@ function getNewId() {
 }
 
 /*
- * Subscribe to Dumpling Intents
+ * Subscribe to TestThing Intents
  */
 
-DumplingIntents.subjects.create.subscribe( function modelDumplingCreate( data ) {
-	var newDumpling = {
+TestThingIntents.subjects.create.subscribe( function modelTestThingCreate( data ) {
+	var newTestThing = {
 		"id": getNewId(),
 		"created": new Date( Date.now() )
 	};
 
-	Object.assign( newDumpling, data );
+	Object.assign( newTestThing, data );
 
-	state = Object.assign( {}, state, { "dumplings": state.dumplings
-		.concat( newDumpling )
+	state = Object.assign( {}, state, { "testThings": state.testThings
+		.concat( newTestThing )
 	} );
 
 	subject.onNext( state );
 } );
 
-DumplingIntents.subjects.update.subscribe( function modelDumplingUpdate( dumpData ) {
-	var [ id, field, newFieldVal ] = dumpData;
+TestThingIntents.subjects.update.subscribe( function modelTestThingUpdate( thingData ) {
+	var [ id, field, newFieldVal ] = thingData;
 
-	state = Object.assign( {}, state, { "dumplings": state.dumplings
-		.map( function updateDumpling( val ) {
+	state = Object.assign( {}, state, { "testThings": state.testThings
+		.map( function updateTestThing( val ) {
 			if ( val.id === id ) {
-				let newVal = Object.assign( {}, val, { [ field ]: newFieldVal } ); // eslint-disable-line quote-props
+				const newVal = Object.assign( {}, val, { [ field ]: newFieldVal } ); // eslint-disable-line quote-props
 				
 				if ( !newFieldVal ) {
 					delete newVal[ field ];
@@ -83,13 +81,13 @@ DumplingIntents.subjects.update.subscribe( function modelDumplingUpdate( dumpDat
 	subject.onNext( state );
 } );
 
-DumplingIntents.subjects.delete.subscribe( function modelDumplingDelete( id ) {
-	var newDumplings = state.dumplings
-		.filter( function removeDumpling( val ) {
+TestThingIntents.subjects.delete.subscribe( function modelTestThingDelete( id ) {
+	var newTestThings = state.testThings
+		.filter( function removeTestThing( val ) {
 			return val.id !== id;
 		} );
 
-	state = Object.assign( state, { "dumplings": newDumplings } );
+	state = Object.assign( state, { "testThings": newTestThings } );
 
 	subject.onNext( state );
 } );

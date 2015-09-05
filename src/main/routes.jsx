@@ -2,9 +2,8 @@
  * @flow-weak
  */
 import { Router5 } 			from "router5";
-import { linkFactory,
-	segmentMixinFactory } 	from "router5-react";
-import BrainDump 			from "../brain-dump/BrainDump";
+import { linkFactory } 		from "router5-react";
+import EditScreen 			from "../edit-screen/EditScreen";
 import YourMom 				from "../test-components/YourMom";
 import LameO 				from "../test-components/LameO";
 
@@ -15,16 +14,15 @@ var router = new Router5()
 	// Routes
 	.addNode( "yourmom", 	"/yourmom" )
 	.addNode( "lameo", 		"/lameo" )
-	.addNode( "braindump", 	"/braindump" )
+	.addNode( "edit-screen", 	"/edit" )
 	.start();
 
 const routeComponents = {
 	"yourmom": YourMom,
 	"lameo": LameO,
-	"braindump": BrainDump
+	"edit-screen": EditScreen
 };
 
 const Link = linkFactory( router );
-const SegmentMixin = segmentMixinFactory( router );
 
-export default { router, routeComponents, Link, SegmentMixin }; // eslint-disable-line quote-props
+export default { router, routeComponents, Link }; // eslint-disable-line quote-props

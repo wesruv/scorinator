@@ -6,7 +6,7 @@ export default class AppKing extends React.Component {
 
 		return (
 				<div className="appShell">
-					<h1>Duggers</h1>
+					<h1>This is a test</h1>
 					<TestNav />
 					{ this.props.children }
 				</div>
