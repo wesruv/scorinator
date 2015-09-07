@@ -32,7 +32,8 @@ const files = {
     "media": [
       "./src/**/*.png",
       "./src/**/*.gif",
-      "./src/**/*.jpg"
+      "./src/**/*.jpg",
+      "./src/**/*.svg"
     ],
     "app": [
       "./src/**/*.jsx",
@@ -60,8 +61,6 @@ const plumberOpts = { "errorHandler": handleError };
 const devServerSettings = {
   "server": files.dev.root,
   "port": 5000,
-  // "tunnel": true,
-  //"ghostMode": false,
   "reloadOnRestart": true
 };
 
@@ -231,7 +230,7 @@ gulp.task("dev-watch", () => {
   // watch style files
   // styles are the only ones that don't have any extra steps
   //     (injected styles = no browser reload)
-  // gulp.watch(files.src.style, ["dev-build-css"]);
+  gulp.watch(files.src.style, ["dev-build-css"]);
 });
 
 gulp.task("dev-serve", ["dev-clean-build-test-all", "dev-watch"], () => {
