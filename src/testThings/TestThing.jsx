@@ -1,63 +1,63 @@
 /*
  * @flow-weak
  */
-import React 					from "react";
-import TestThingKnight 			from "./TestThingKnight";
-import TestThingEditControls 	from "./TestThingEditControls";
-import TestThingIntents 			from "../intents/TestThingIntents";
+import React           from "react";
+import TestThingKnight       from "./TestThingKnight";
+import TestThingEditControls   from "./TestThingEditControls";
+import TestThingIntents       from "../intents/TestThingIntents";
 
 export default class TestThing extends React.Component {
-	constructor( props ) {
-		super( props );
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			"handleFieldChange": this.handleFieldChange.bind( this ),
-			"handleDelete": this.handleDelete.bind( this ),
-			"focusFreshTestThing": this.focusFreshTestThing.bind( this )
-		};
-	}
+    this.state = {
+      "handleFieldChange": this.handleFieldChange.bind(this),
+      "handleDelete": this.handleDelete.bind(this),
+      "focusFreshTestThing": this.focusFreshTestThing.bind(this)
+    };
+  }
 
-	/*
-	 * Lifecycle Functions
-	 */
-	
-	render() {
-		return (
-			<TestThingKnight { ...this.props } { ...this.state }>
-				<TestThingEditControls handleDelete={ this.state.handleDelete } />
-			</TestThingKnight>
-		);
-	}
+  /*
+   * Lifecycle Functions
+   */
 
-	/*
-	 * Event Handlers
-	 */
+  render() {
+    return (
+      <TestThingKnight { ...this.props } { ...this.state }>
+        <TestThingEditControls handleDelete={ this.state.handleDelete } />
+      </TestThingKnight>
+    );
+  }
 
-	focusFreshTestThing( ref ) {
-		const newTestThing = React.findDOMNode( ref );
-		const len = newTestThing.value.length;
+  /*
+   * Event Handlers
+   */
 
-		newTestThing.focus();
-		newTestThing.setSelectionRange( len, len );
-		
-		TestThingIntents.update( this.props.id, "fresh", false );
-	}
-	
-	handleFieldChange( fieldName, ref ) {
-		const newVal = ref.value;
+  focusFreshTestThing(ref) {
+    const newTestThing = React.findDOMNode(ref);
+    const len = newTestThing.value.length;
 
-		TestThingIntents.update( this.props.id, fieldName, newVal );
-	}
+    newTestThing.focus();
+    newTestThing.setSelectionRange(len, len);
 
-	handleDelete() {
-		TestThingIntents.delete( this.props.id );
-	}
+    TestThingIntents.update(this.props.id, "fresh", false);
+  }
+
+  handleFieldChange(fieldName, ref) {
+    const newVal = ref.value;
+
+    TestThingIntents.update(this.props.id, fieldName, newVal);
+  }
+
+  handleDelete() {
+    TestThingIntents.delete(this.props.id);
+  }
 }
 
 TestThing.PropTypes = {
-	"id": React.PropTypes.number.isRequired,
-	"title": React.PropTypes.string,
-	"description": React.PropTypes.string,
-	"created": React.PropTypes.instanceOf( Date ),
-	"fresh": React.PropTypes.bool
+  "id": React.PropTypes.number.isRequired,
+  "title": React.PropTypes.string,
+  "description": React.PropTypes.string,
+  "created": React.PropTypes.instanceOf(Date),
+  "fresh": React.PropTypes.bool
 };

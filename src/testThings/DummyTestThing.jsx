@@ -1,29 +1,29 @@
 /*
  * @flow-weak
  */
-import React 				from "react";
-import TestThingIntents 		from "../intents/TestThingIntents";
-import DummyTestThingKnight 	from "./DummyTestThingKnight";
+import React         from "react";
+import TestThingIntents     from "../intents/TestThingIntents";
+import DummyTestThingKnight   from "./DummyTestThingKnight";
 
 export default class DummyTestThing extends React.Component {
-	constructor( props ) {
-		super( props );
+  constructor(props) {
+    super(props);
 
-		this.handleClick = this.handleClick.bind( this );
-	}
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-	render() {
-		return <DummyTestThingKnight handleClick={ this.handleClick } />;
-	}
+  render() {
+    return <DummyTestThingKnight handleClick={ this.handleClick } />;
+  }
 
-	/*
-	 * Event Handlers
-	 */
+  /*
+   * Event Handlers
+   */
 
-	handleClick() {
-		TestThingIntents.create(
-			{
-				"fresh": true
-			} );
-	}
+  handleClick() {
+    TestThingIntents.create(
+      {
+        "fresh": true
+      });
+  }
 }
