@@ -1,0 +1,36 @@
+
+// CSS Pseudo Element Helpers e.g. :before{} and :after{}
+
+////
+// Create Basic Block Pseudo Element
+///
+@mixin block-pseudo-element($content: ' '){
+  content: $content;
+  display: block;
+}
+
+////
+// Create block level pseudo elmeent with a background
+///
+@mixin bg-block-pseudo-element($element-bg: null, $width: 20px, $height: 20px){
+  @include block-pseudo-element;
+  width: $width;
+  height: $height;
+  background: $element-bg;
+}
+
+////
+// Create a Pseudo Element that is made of borders
+///
+@mixin border-pseudo-element($element-bg: null, $width: 10px, $height: 10px){
+  @include block-pseudo-element;
+  width: 0;
+  height: 0;
+  @if $width == $height {
+    border: $width solid $element-bg;
+  } @else {
+    border: $width solid $element-bg;
+    border-top-width: $height;
+    border-bottom-width: $height;
+  }
+}

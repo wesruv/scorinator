@@ -1,0 +1,98 @@
+//  This is version 2... only reliable docs are in the doc blocks below
+//  Documentation will be @ codepen.io/wesruv/pen/eIpuv
+//
+// List of all breakpoints, and their minimum width
+// Human names are used for breakpoint name in mixin
+$breakpoints: (
+  quebec:   1200px,
+  november: 1000px,
+  kilo:      800px,
+  hotel:     600px,
+  echo:      400px,
+);
+
+///
+// Breakpoint mixin, to use declare
+// Documentation @ codepen.io/wesruv/pen/eIpuv
+//
+// @param  $breakpoint    string    Optional, Human name for breakpoint desired,
+// @param  $px-ratio      integer   Optional, used to target displays of a certain pixel density
+// @param  $orientation   string    Optional, should be portrait or landscape
+// @param  $breakpoints   map       In case you want to use a different breakpoint map, defaults to $breakpoints
+///
+@mixin breakpoint($breakpoint: null, $px-ratio: null, $orientation: null, $breakpoints: $breakpoints){
+  $media-query: '';
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-min: map-get($breakpoints, $breakpoint);
+    $media-query: $media-query + '(min-width: #{$breakpoint-min})'
+  } @elseif $breakpoint != null {
+    // Warn if value isn't found
+    @warn 'Breakpoint #{$breakpoint} couldn\'t be found in breakpoints';
+  }
+
+  @if $px-ratio != null {
+    // Warn if value doesn't seem to be valid
+    @if $px-ratio > 10 {
+      @if $px-ratio < 1 {
+        @warn '#{$px-ratio} does not seem to be a valid value. Should be something like 1, 1.25, 2, 4, etc.'
+      }
+    }
+    $dpi: $px-ratio * 96;
+    @if $media-query != '' {
+      $media-query: $media-query + ' and ';
+    }
+    $media-query: $media-query + '(-webkit-min-device-pixel-ratio: #{$px-ratio}), (min-resolution: #{$dpi}dpi)';
+  }
+
+  @if $orientation != null {
+    // Warn if value doesn't seem to be valid
+    @if $orientation != landscape {
+      @if $orientation != portrait {
+        @warn '#{$orientation} doesn\'t seem to be a valid value for "orientation". Should be portrait or landscape.';
+      }
+    }
+    @if $media-query != '' {
+      $media-query: $media-query + ' and ';
+    }
+    $media-query: $media-query + '(orientation: #{$orientation})';
+  }
+
+  @if $media-query != '' {
+    @media #{$media-query} {
+      @content;
+    }
+  }
+}
+
+
+///
+// Adds a small message to indicate what breakpoint the current view is at
+// @param $vertical-position    string    Should be set to top or bottom
+// @param $horizontal-position  string    Should be set to left or right
+// @param $breakpoints          map       Breakpoints that will be iterated on, defaults to $breakpoints
+///
+@mixin debug-breakpoints($vertical-position: bottom, $horizontal-position: left, $breakpoints: $breakpoints) {
+  // Basic styles for tooltip
+  body:before {
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    #{$vertical-position}: 0;
+    #{$horizontal-position}: 0;
+    padding: .7em 1em;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    line-height: 1em;
+    font-weight: 600;
+  }
+
+  @each $breakpoint-name, $breakpoint-min in $breakpoints {
+    body:before {
+      @include breakpoint($breakpoint-name){
+        content: '#{$breakpoint-name}';
+      }
+    }
+  }
+
+}

@@ -1,0 +1,6 @@
+///
+// Helper to abstract image path
+///
+@function image-url($path) {
+  @return url($path-image + $path);
+}

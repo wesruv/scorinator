@@ -28,7 +28,7 @@ function handleError(error) {
 const files = {
   "src": {
     "markup": "./src/**/*.html",
-    "style": "./src/**/*.scss",
+    "style": "./src/styles/**/*.scss",
     "media": [
       "./src/**/*.png",
       "./src/**/*.gif",
@@ -144,8 +144,7 @@ gulp.task("dev-build-css", () => {
     .pipe(sourcemaps.init())
       .pipe(sass()
         .on('error', sass.logError ))
-      .pipe(newer(`${ files.dev.css }/all.css`))
-      .pipe(concat("all.css"))
+      .pipe(concat("styles.css"))
       .pipe(autoprefixer())
     .pipe(sourcemaps.write())
     .pipe(flatten())

@@ -1,0 +1,13 @@
+.app-header {
+  background: #ddd;
+  margin: 0 0 .4em;
+  padding: .2em .4em;
+  text-align: center;
+
+  &__title {
+    display: inline-block;
+    font-size: 1em;
+    line-height: 1.2;
+  }
+
+}

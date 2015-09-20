@@ -1,0 +1,28 @@
+.form {
+
+  &__field-wrapper {
+    margin: 0 1em;
+  }
+
+  &__label {
+    display: block;
+    margin: 0 0 .2em;
+    padding: .4em 0;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  &__text-field {
+    display: block;
+    width: 100%;
+    margin: 0 0 1.3em;
+    padding: .4em .6em;
+    border: 1px solid #ccc;
+    font-size: 1.2em;
+  }
+
+  .form__actions-wrapper {
+    text-align: right;
+  }
+
+}

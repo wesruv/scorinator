@@ -2,9 +2,13 @@ import React from "react";
 
 export default class AppWrapper extends React.Component {
   render() {
+    var appHeaderTitle = 'Kepler'; // @todo logic to set title to
+
     return (
-        <div className="appShell">
-          <h1>This is a test</h1>
+        <div className="app-shell">
+          <div className="app-header">
+            <h1 className="app-header__title">{{appHeaderTitle}}</h1>
+          </div>
           { this.props.children }
         </div>
       );

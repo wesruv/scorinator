@@ -1,0 +1,93 @@
+//
+// Makes a column for the grid, assumes fluid columns unless told otherwise
+// @param columnSpan       integer   Number of grid columns this layout column should span
+// @param maxWidth         unit      Maximum with of the entire grid with units, e.g. 960px or 100% or 60em
+// @param defaultPadding   boolean   Whether or not default padding should be included
+// @param numberOfColumns integer   Can specify the maximum number of columns in the grid, by default it is 12
+///
+@mixin column($columnSpan: null, $maxWidth: 100%, $float: left, $numberOfColumns: 12){
+  @include set-column-width($columnSpan, $maxWidth, $float, $numberOfColumns);
+  min-height: 1px;
+  float: $float;
+}
+
+
+///
+// Sets a column width for the grid, assumes fluid columns unless told otherwise
+// @param columnSpan       integer   Number of grid columns this layout column should span
+// @param maxWidth         unit      Maximum with of the entire grid with units, e.g. 960px or 100% or 60em
+// @param defaultPadding   boolean   Whether or not default padding should be included
+// @param numberOfColumns integer   Can specify the maximum number of columns in the grid, by default it is 12
+///
+@mixin set-column-width($columnSpan: null, $maxWidth: 100%, $float: left, $numberOfColumns: 12){
+  $accuracy: 1000;
+  @if $columnSpan != null {
+    width: (floor($columnSpan * $accuracy / $numberOfColumns) / $accuracy * $maxWidth);
+  }
+}
+
+
+///
+// Makes a container for columns in the grid, used to clearfix and to make child
+// columns line up with parents because of first and last child's padding.
+// Only need a 'column-container' per nested columns, not per 'row'.
+// e.g .column-container>.column-span-4*9999 is fine,
+//  but .column-container>.column-span-4>.column-span-6*2 will need column container styles on their parent
+//  A container can be a column and a column container, but you'll need to remove the negative margin from make-column-container
+///
+@mixin column-container() {
+  @include clearfix;
+}
+
+
+///
+// Clearfix fix from:
+// http://css-tricks.com/snippets/css/clear-fix
+///
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+///
+// Used to make images shrink with width of their container
+///
+@mixin img-flex($dimension: width) {
+  $opposite-dimension: height;
+  @if $dimension != width {
+    $opposite-dimension: width;
+    $dimension: width;
+  }
+  #{'max-' + $dimension}: 100%;
+  #{$opposite-dimension}: auto;
+  vertical-align: middle;
+}
+
+
+///
+// Phark Text replace styles for phark technique
+///
+@mixin text-replace {
+///
+  display: block;
+  overflow: hidden;
+  text-indent: -9999em;
+}
+
+///
+// Screen reader only element
+///
+@mixin screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0
+}
