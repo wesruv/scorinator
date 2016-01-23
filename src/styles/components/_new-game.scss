@@ -1,6 +1,6 @@
-.form {
+.new-game {
 
-  &__field-wrapper {
+  &__field {
     margin: 0 1em;
   }
 
@@ -19,10 +19,6 @@
     padding: .4em .6em;
     border: 1px solid #ccc;
     font-size: 1.2em;
-  }
-
-  .form__actions-wrapper {
-    text-align: right;
   }
 
 }

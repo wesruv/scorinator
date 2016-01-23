@@ -1,17 +1,30 @@
 import React from "react";
+import globalStore  from "./GlobalStore";
 
 export default class AppWrapper extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      "globalStore": globalStore.getAll()
+    };
+  }
   render() {
-    var appHeaderTitle = "Kepler"; // @todo logic to set title to
+    var titleBarText = this.state.globalStore.appName;
 
+    // @todo Make this grab the current game name... doesn't work right now
+    if (this.state.globalStore.currentGame !== null) {
+      const currentGame = this.globalStore.games["gid" + this.state.globalStore.currentGame];
+
+      titleBarText = currentGame.name;
+    }
     return (
         <div className="app-shell">
           <div className="app-header">
             <h1 className="app-header__title">
-              { appHeaderTitle }
+              {titleBarText}
             </h1>
           </div>
-          { this.props.children }
+          {this.props.children}
         </div>
       );
   }

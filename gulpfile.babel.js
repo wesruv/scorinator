@@ -43,7 +43,7 @@ const files = {
   "src": {
     "markup": "./src/**/*.html",
     "styles": {
-      "global": "./src/**/*.scss"
+      "global": "./src/styles/**/*.scss"
     },
     "media": [
       "./src/**/*.png",
@@ -300,7 +300,7 @@ gulp.task("dev-watch", () => {
 
   // watch style files
   //     (injected styles = no browser reload)
-  gulp.watch(files.src.style, ["dev-build-globalcss"]);
+  gulp.watch(files.src.styles.global, ["dev-build-globalcss"]);
 
   // watch test files
   gulp.watch(files.src.tests, ["dev-test-app"]);
