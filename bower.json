@@ -1,5 +1,5 @@
 {
-  "name": "es6-gulp-systemjs-react-stylus",
+  "name": "stuff",
   "version": "0.0.1",
   "moduleType": [
     "es6"
@@ -13,8 +13,6 @@
     "tests"
   ],
   "dependencies": {
-    "router5": "~0.4.2",
-    "system.js": "~0.18.10",
-    "router5-react": "~0.1.1"
+    "system.js": "~0.18.10"
   }
 }
