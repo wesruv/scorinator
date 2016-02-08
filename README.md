@@ -18,7 +18,9 @@
 
 # Dev Platform Details
 
-**You don't have to use vagrant**, it should work, but I don't use it. Instead of doing all this junk below, you can simply run:
+## Non-vagrant setup
+
+**You don't have to use vagrant**, it should work, but I don't use it. Simply run:
 
 ```
 npm install
