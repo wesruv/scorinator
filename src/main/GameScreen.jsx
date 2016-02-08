@@ -19,9 +19,11 @@ export default class GameScreen extends React.Component {
     const currentGameID = "gid" + this.state.globalStore.currentGame;
     const currentGame = this.state.globalStore.games[currentGameID];
     const _this = this;
+    // Render Players List
     const playersList = currentGame.players.map(function buildPlayerList(playerKey) {
       const player = _this.state.globalStore.players[playerKey];
-      const currentScore = currentGame.scores[playerKey];
+      const currentScoreOperations = currentGame.scores[playerKey];
+      const currentScore = currentScoreOperations.current;
 
       return (
         <li className="game-screen__player player player--list" key={playerKey}>
@@ -31,7 +33,7 @@ export default class GameScreen extends React.Component {
           <div className="player__current-score">
             {currentScore}
           </div>
-          <Link to={"calculator/" + currentGameID + "/" + playerKey} className="player__action player__action--score">
+          <Link to={"calculator?gid=" + currentGameID + "&pid=" + playerKey} className="player__action player__action--score">
             Score
           </Link>
         </li>

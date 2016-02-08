@@ -13,6 +13,11 @@ export default class NewGame extends React.Component {
       "globalStore": globalStore.getAll()
     };
   }
+  componentWillUpdate() {
+    this.state = {
+      "globalStore": globalStore.getAll()
+    };
+  }
   render() {
     return (
       <form className="new-game" onSubmit={this._handleSubmit}>

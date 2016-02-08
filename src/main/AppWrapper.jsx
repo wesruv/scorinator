@@ -8,12 +8,17 @@ export default class AppWrapper extends React.Component {
       "globalStore": globalStore.getAll()
     };
   }
+  componentWillUpdate() {
+    this.state = {
+      "globalStore": globalStore.getAll()
+    };
+  }
   render() {
     var titleBarText = this.state.globalStore.appName;
 
     // @todo Make this grab the current game name... doesn't work right now
     if (this.state.globalStore.currentGame !== null) {
-      const currentGame = this.globalStore.games["gid" + this.state.globalStore.currentGame];
+      const currentGame = this.state.globalStore.games["gid" + this.state.globalStore.currentGame];
 
       titleBarText = currentGame.name;
     }

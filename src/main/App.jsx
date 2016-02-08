@@ -12,12 +12,14 @@ import { Router, Route, IndexRoute } 	from "react-router";
 
 // globalStore is for immediate dev purposes only. It's a sack of shit.
 // Declared to init globalStore so it's inherited globally throughout the app
+// Does not update React's state to trigger a render
 import globalStore    from "./GlobalStore";
 
 // Imported Components for Routes
 import MenuScreen     from "./MenuScreen";
 import NewGame        from "./NewGame";
 import GameScreen     from "./GameScreen";
+import Calculator     from "./Calculator";
 
 /**
  * Create <App /> and structure it's children
@@ -46,8 +48,13 @@ React.render(
   <Router >
     <Route path="/" component={App}>
       <IndexRoute component={MenuScreen} />
+      {/*
+        Create new routes (paths) here. Make sure the component name
+        has been imported above.
+      */}
       <Route path="new-game" component={NewGame} />
       <Route path="game-screen" component={GameScreen} />
+      <Route path="calculator" component={Calculator} />
     </Route>
   </Router>,
   document.getElementById("app")

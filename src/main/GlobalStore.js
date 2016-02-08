@@ -7,7 +7,7 @@ var globalStore = {};
 
 // Set global defaults
 globalStore.appName = "Kepler";
-globalStore.currentGame = null;
+globalStore.currentGame = 1;
 
 // Setup default players
 globalStore.players = {};
@@ -37,13 +37,38 @@ globalStore.games.gid1 = {
   "name": "Hearts on Guys Night",
   "players": ["pid1", "pid2", "pid4", "pid5"],
   "scores": {
-    "pid1": 0,
-    "pid2": 20,
-    "pid4": 0,
-    "pid5": 0,
+    "pid1": {
+      "current": 0,
+      "steps": {
+      }
+    },
+    "pid2": {
+      "current": 20,
+      "steps": {
+        "step1": {
+          "current": 0,
+          "operation": "+",
+          "value": 13
+        },
+        "step2": {
+          "current": 13,
+          "operation": "+",
+          "value": 7
+        },
+      }
+    },
+    "pid4": {
+      "current": 0,
+      "steps": {
+      }
+    },
+    "pid5": {
+      "current": 0,
+      "steps": {
+      }
+    },
   },
 };
-
 
 
 export default {
