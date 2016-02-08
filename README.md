@@ -20,7 +20,7 @@
 
 ## Non-vagrant setup
 
-**You don't have to use vagrant**, it should work, but I don't use it. Simply run:
+**You don't have to use vagrant**, it should work, but I don't use it. Assuming you have Node.js/npm installed (recommend node 5.4+ and npm 3.3+), simply run:
 
 ```
 npm install
