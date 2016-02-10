@@ -1,4 +1,4 @@
-## Quick Reference
+# Quick Reference
 
 -   Repo
     -   SSH: git@bitbucket.org:illfittingshoes/publas.git
@@ -16,8 +16,25 @@
         -   Vagrant PuTTY SSH key
     -   [Cmder](http://gooseberrycreative.com/cmder/) (Windows) for awesome console (use msysgit version for great Git & \*nix justice!)
 
-## Dev Platform Details
+# Dev Platform Details
 
+## Non-vagrant setup
+
+**You don't have to use vagrant**, it should work, but I don't use it. Assuming you have Node.js/npm installed (recommend node 5.4+ and npm 3.3+), simply run:
+
+```
+npm install
+```
+
+If that goes well, you can then run:
+
+```
+npm run dev
+```
+
+And you should be up and running.
+
+## Vagrant setup:
 
 Using [Vagrant](https://www.vagrantup.com/) to provision and manage a [VirtualBox](https://www.virtualbox.org/) VM of [Ubuntu Trusty Tahr](http://ubuntuguide.org/wiki/Ubuntu_Trusty) (CLI-only).
 
