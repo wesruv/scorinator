@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "bower install",
     "test": "gulp dev-clean-build-test-all",
+    "clean": "rm -rf build-dev node_modules bower_components",
     "dev": "gulp",
     "bower": "bower",
     "gulp": "gulp"
