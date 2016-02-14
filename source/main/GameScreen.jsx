@@ -1,6 +1,6 @@
 import React        from "react";
 import {Link}       from "react-router";
-import globalStore  from "./GlobalStore";
+import globalStore  from "../stores/GlobalStore";
 
 export default class GameScreen extends React.Component {
   constructor() {

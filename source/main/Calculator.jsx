@@ -1,5 +1,5 @@
 import React        from "react";
-import globalStore  from "./GlobalStore";
+import globalStore  from "../stores/GlobalStore";
 
 export default class Calculator extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class Calculator extends React.Component {
     };
   }
   componentWillUpdate() {
-    console.log('updated calculator!');
+    console.log("updated calculator!");
     this.state = {
       "globalStore": globalStore.getAll()
     };
@@ -21,18 +21,20 @@ export default class Calculator extends React.Component {
   render() {
     const currentGameID = "gid" + this.state.globalStore.currentGame;
     const currentGame = this.state.globalStore.games[currentGameID];
-    const currentPlayer = 'pid2'; // @todo get this from URL
+    const currentPlayer = "pid2"; // @todo get this from URL
     const scoreOperations = currentGame.scores[currentPlayer].steps;
     const scoreOperationsKeys = Object.keys(scoreOperations);
     const scoreSteps = scoreOperationsKeys.map(function buildPlayerList(scoreStepKey) {
       console.log(scoreStepKey);
       const currentScoreStep = scoreOperations[scoreStepKey];
+
       return (
         <li className="calculator-screen__step" key={scoreStepKey}>
           {currentScoreStep.current} {currentScoreStep.operation} {scoreOperations[scoreStepKey].value}
         </li>
       );
     });
+
     return (
       <form className="calculator" onSubmit={this._handleSubmit}>
         <div className="calculator__screen calculator-screen">
@@ -149,6 +151,6 @@ export default class Calculator extends React.Component {
    */
   _handleButtonClick(e) {
     e.preventDefault();
-    console.log('button click');
+    console.log("button click");
   }
 }

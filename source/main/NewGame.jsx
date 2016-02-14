@@ -1,5 +1,5 @@
 import React        from "react";
-import globalStore  from "./GlobalStore";
+import globalStore  from "../stores/GlobalStore";
 
 export default class NewGame extends React.Component {
   constructor() {

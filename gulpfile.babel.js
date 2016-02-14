@@ -40,28 +40,28 @@ function handleError(error) {
 }
 
 const files = {
-  "src": {
-    "markup": "./src/**/*.html",
+  "source": {
+    "markup": "./source/**/*.html",
     "styles": {
-      "global": "./src/styles/**/*.scss"
+      "global": "./source/styles/**/*.scss"
     },
     "media": [
-      "./src/**/*.png",
-      "./src/**/*.gif",
-      "./src/**/*.jpg",
-      "./src/**/*.svg"
+      "./source/**/*.png",
+      "./source/**/*.gif",
+      "./source/**/*.jpg",
+      "./source/**/*.svg"
     ],
     "app": [
-      "./src/**/*.jsx",
-      "./src/**/*.js"
+      "./source/**/*.jsx",
+      "./source/**/*.js"
     ],
-    "appEntry": "./src/main/app.jsx",
+    "appEntry": "./source/main/app.jsx",
     "nodeLibs": [
-      { "src": "react", "folder": "/dist", "files": "**/*.js", "dest": "react" },
-      { "src": "react-router", "folder": "/umd", "files": "**/*.js", "dest": "react-router" },
-      { "src": "pouchdb", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb" },
-      { "src": "pouchdb-find", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb-find" },
-      { "src": "rx", "folder": "/dist", "files": "**/*.js", "dest": "rx" }
+      { "source": "react", "folder": "/dist", "files": "**/*.js", "dest": "react" },
+      { "source": "react-router", "folder": "/umd", "files": "**/*.js", "dest": "react-router" },
+      { "source": "pouchdb", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb" },
+      { "source": "pouchdb-find", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb-find" },
+      { "source": "rx", "folder": "/dist", "files": "**/*.js", "dest": "rx" }
     ],
     "bowerLib": "./bower_components/*/dist/**/*.js",
     "tests": "./tests/**/*.js*"
@@ -88,14 +88,14 @@ const devServerSettings = {
 };
 
 function exportBowerLibs(destRoot) {
-  return gulp.src(files.src.bowerLib)
+  return gulp.src(files.source.bowerLib)
     .pipe(plumber(plumberOpts))
     .pipe(gulp.dest(`${ destRoot }/bower`));
 }
 
 function exportnodeLibs(destRoot) {
-  var nodeLibStreams = files.src.nodeLibs.map((val) => {
-    return gulp.src(`./node_modules/${ val.src + val.folder }/${ val.files }`)
+  var nodeLibStreams = files.source.nodeLibs.map((val) => {
+    return gulp.src(`./node_modules/${ val.source + val.folder }/${ val.files }`)
       .pipe(gulp.dest(`${ destRoot }/node/${ val.dest }`));
   });
 
@@ -133,14 +133,14 @@ gulp.task("dev-export-node-libs", () => {
  * ****************************/
 
 gulp.task("lint-app-all", () => {
-  return gulp.src(files.src.app)
+  return gulp.src(files.source.app)
     .pipe(plumber(plumberOpts))
     .pipe(eslint())
     .pipe(eslint.format(friendlyFormatter));
 });
 
 gulp.task("lint-app", () => {
-  return gulp.src(files.src.app)
+  return gulp.src(files.source.app)
     .pipe(plumber(plumberOpts))
     .pipe(newer({
       "dest": files.dev.app,
@@ -151,7 +151,7 @@ gulp.task("lint-app", () => {
 });
 
 gulp.task("dev-build-tests", () => {
-  return gulp.src(files.src.tests)
+  return gulp.src(files.source.tests)
     .pipe(plumber(plumberOpts))
     .pipe(newer({
       "dest": files.dev.testDir,
@@ -174,10 +174,10 @@ gulp.task("dev-build-and-test-app", ["dev-lint-and-build-app"], (done) => {
 
 gulp.task("dev-watch-app-test", (done) => {
   // watch app files
-  gulp.watch(files.src.app, ["dev-build-and-test-app"]);
+  gulp.watch(files.source.app, ["dev-build-and-test-app"]);
 
   // watch test files
-  gulp.watch(files.src.tests, ["dev-test-app"]);
+  gulp.watch(files.source.tests, ["dev-test-app"]);
 
   return done();
 });
@@ -198,7 +198,7 @@ gulp.task("dev-test-cycle", (done) => {
  * ****************************/
 
 gulp.task("dev-build-globalcss", () => {
-  return gulp.src(files.src.styles.global)
+  return gulp.src(files.source.styles.global)
     .pipe(plumber(plumberOpts))
     .pipe(sourcemaps.init())
       .pipe(sass()
@@ -213,7 +213,7 @@ gulp.task("dev-build-globalcss", () => {
 });
 
 gulp.task("dev-build-media", () => {
-  return gulp.src(files.src.media, { "buffer": false })
+  return gulp.src(files.source.media, { "buffer": false })
     .pipe(plumber(plumberOpts))
     .pipe(newer(files.dev.media))
     .pipe(flatten())
@@ -222,7 +222,7 @@ gulp.task("dev-build-media", () => {
 
 /* Lint then build */
 gulp.task("dev-lint-and-build-app", ["lint-app"], () => {
-  return gulp.src(files.src.app)
+  return gulp.src(files.source.app)
     .pipe(plumber(plumberOpts))
     .pipe(newer(files.dev.app))
     .pipe(sourcemaps.init())
@@ -233,7 +233,7 @@ gulp.task("dev-lint-and-build-app", ["lint-app"], () => {
 
 /* Build Without Lint */
 gulp.task("dev-build-app", () => {
-  return gulp.src(files.src.app)
+  return gulp.src(files.source.app)
     .pipe(plumber(plumberOpts))
     .pipe(newer(files.dev.app))
     .pipe(sourcemaps.init())
@@ -243,7 +243,7 @@ gulp.task("dev-build-app", () => {
 });
 
 gulp.task("dev-build-markup", () => {
-  return gulp.src(files.src.markup, { "buffer": false })
+  return gulp.src(files.source.markup, { "buffer": false })
     .pipe(plumber(plumberOpts))
     .pipe(newer(files.dev.root))
     .pipe(flatten())
@@ -288,22 +288,22 @@ gulp.task("dev-clean-build-test-all", (done) => {
 
 gulp.task("dev-watch", () => {
   // watch app files
-  gulp.watch(files.src.app, ["dev-watch-app"]);
+  gulp.watch(files.source.app, ["dev-watch-app"]);
 
   // watch markup files
-  gulp.watch(files.src.markup, ["dev-watch-markup"]);
+  gulp.watch(files.source.markup, ["dev-watch-markup"]);
 
   // watch media files
-  gulp.watch(files.src.media, ["dev-watch-media"]);
+  gulp.watch(files.source.media, ["dev-watch-media"]);
 
   // styles and tests are the only ones that don't have any extra steps
 
   // watch style files
   //     (injected styles = no browser reload)
-  gulp.watch(files.src.styles.global, ["dev-build-globalcss"]);
+  gulp.watch(files.source.styles.global, ["dev-build-globalcss"]);
 
   // watch test files
-  gulp.watch(files.src.tests, ["dev-test-app"]);
+  gulp.watch(files.source.tests, ["dev-test-app"]);
 });
 
 gulp.task("dev-serve", ["dev-clean-build-test-all", "dev-watch"], () => {
