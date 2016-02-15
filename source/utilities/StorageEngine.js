@@ -138,7 +138,7 @@ const stateCUDHelpers = {
       sendInnerStoreAction(this, "update", data, id);
       updateStoreState(this, merged);
     } else {
-      console.log(`attempted to update item "${ id }", which doesn't exist`);
+      console.log(`attempted to update item "${ id }", which doesn't exist`); //eslint-disable-line no-console
     }
   },
 

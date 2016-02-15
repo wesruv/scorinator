@@ -15,20 +15,7 @@ import browserSync         from "browser-sync";
 import del                 from "del";
 import merge               from "merge2";
 import runSeq              from "run-sequence";
-import postcss             from "gulp-postcss";
-
-/*
-  TODO
-  * test server
-  *   - bundle app?
-  *   - any images processing
-  *   - sourcemaps
-  * prod server
-  *   - bundle app?
-  *   - any image processing
-  *   - no sourcemaps
-  *   - minify everything
- */
+// import postcss             from "gulp-postcss";
 
 /* *****************************************
  * Constants and "global" helper functions
@@ -57,11 +44,12 @@ const files = {
     ],
     "appEntry": "./source/main/app.jsx",
     "nodeLibs": [
-      { "source": "react", "folder": "/dist", "files": "**/*.js", "dest": "react" },
-      { "source": "react-router", "folder": "/umd", "files": "**/*.js", "dest": "react-router" },
-      { "source": "pouchdb", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb" },
-      { "source": "pouchdb-find", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb-find" },
-      { "source": "rx", "folder": "/dist", "files": "**/*.js", "dest": "rx" }
+      { "src": "systemjs", "folder": "/dist", "files": "**/*.js", "dest": "systemjs" },
+      { "src": "react", "folder": "/dist", "files": "**/*.js", "dest": "react" },
+      { "src": "react-router", "folder": "/umd", "files": "**/*.js", "dest": "react-router" },
+      { "src": "pouchdb", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb" },
+      { "src": "pouchdb-find", "folder": "/dist", "files": "**/*.js", "dest": "pouchdb-find" },
+      { "src": "rx", "folder": "/dist", "files": "**/*.js", "dest": "rx" }
     ],
     "bowerLib": "./bower_components/*/dist/**/*.js",
     "tests": "./tests/**/*.js*"
@@ -95,7 +83,7 @@ function exportBowerLibs(destRoot) {
 
 function exportnodeLibs(destRoot) {
   var nodeLibStreams = files.source.nodeLibs.map((val) => {
-    return gulp.src(`./node_modules/${ val.source + val.folder }/${ val.files }`)
+    return gulp.src(`./node_modules/${ val.src + val.folder }/${ val.files }`)
       .pipe(gulp.dest(`${ destRoot }/node/${ val.dest }`));
   });
 

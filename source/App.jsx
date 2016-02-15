@@ -6,20 +6,14 @@
  * Load in dependencies
  */
 import React                          from "react";
-// import StateModel                  from "../models/StateModel";
 import AppWrapper                     from "./AppWrapper";
 import { Router, Route, IndexRoute }  from "react-router";
 
-// globalStore is for immediate dev purposes only. It's a sack of shit.
-// Declared to init globalStore so it's inherited globally throughout the app
-// Does not update React's state to trigger a render
-import globalStore    from "../stores/GlobalStore";
-
 // Imported Components for Routes
-import MenuScreen     from "./MenuScreen";
-import NewGame        from "./NewGame";
-import GameScreen     from "./GameScreen";
-import Calculator     from "./Calculator";
+import MenuScreen     from "./components/MenuScreen";
+import NewGame        from "./components/NewGame";
+import GameScreen     from "./components/GameScreen";
+import Calculator     from "./components/Calculator";
 
 /**
  * Create <App /> and structure it's children

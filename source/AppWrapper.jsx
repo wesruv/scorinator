@@ -1,5 +1,6 @@
-import React from "react";
-import globalStore  from "../stores/GlobalStore";
+import React        from "react";
+import globalStore  from "./stores/GlobalStore";
+import GameStore    from "./data-handlers/game/Store";
 
 export default class AppWrapper extends React.Component {
   constructor() {
@@ -7,6 +8,18 @@ export default class AppWrapper extends React.Component {
     this.state = {
       "globalStore": globalStore.getAll()
     };
+  }
+  componentWillMount() {
+    const setState = this.setState.bind(this);
+    const state = this.state;
+
+    GameStore.subject.subscribe(function onSubscribeAction(Games) {
+      if (Games && Games !== state.Games) {
+        setState({
+          Games
+        });
+      }
+    });
   }
   componentWillUpdate() {
     this.state = {

@@ -4,17 +4,16 @@
   "description": "Babel, React, System.js, Gulp, Browsersync, Mocha/Chai, ESLint, Sass, RxJS, Autoprefixer",
   "main": "gulpfile.babel.js",
   "scripts": {
+    "bower": "bower",
+    "gulp": "gulp",
     "postinstall": "bower install",
     "test": "gulp dev-clean-build-test-all",
     "clean": "rm -rf build-dev node_modules bower_components",
-    "dev": "gulp",
-    "bower": "bower",
-    "gulp": "gulp"
+    "dev": "npm run gulp"
   },
   "author": "Your Mother",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^5.8.35",
     "babel-plugin-object-assign": "^1.2.1",
     "bower": "^1.7.7",
     "browser-sync": "^2.8.0",

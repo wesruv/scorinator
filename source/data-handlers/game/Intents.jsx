@@ -1,6 +1,3 @@
-/*
- * @flow-weak
- */
 // Handles the write part of things
 import Rx from "rx";
 
@@ -20,42 +17,39 @@ const subjects = {
   "delete": new Rx.Subject()
 };
 
-/*
-// Example function from View layer to take advantage of "create" observer below
-import React            from "react";
-import Rx               from "rx";
-import DumplingIntents  from "../intents/DumplingIntents";
-
-function streamDataToObserver(data, subscribingObserver) {
-  Rx.Observable
-    .create((currentObserver) => {
-      // Step 1
-      // Updates all subscribers
-      // Creating a stream
-      currentObserver.onNext( data );
-    })
-    // Step 2
-    // Subscribe the observer to what we just made
-    // Point the stream to the create intent
-    .subscribe(subscribingObserver);
-}
-
-// Create new data
-streamDataToObserver(data, DumplingIntents.observers.create);
-
-// Update Data
-var data = [{fieldName: fieldValue}, game-id];
-streamDataToObserver(data, DumplingIntents.observers.update);
-
- */
+// // Example function from View layer to take advantage of "create" observer below
+// import React            from "react";
+// import Rx               from "rx";
+// import DumplingIntents  from "../intents/DumplingIntents";
+//
+// function streamDataToObserver(data, subscribingObserver) {
+//   Rx.Observable
+//     .create((currentObserver) => {
+//       // Step 1
+//       // Updates all subscribers
+//       // Creating a stream
+//       currentObserver.onNext( data );
+//     })
+//     // Step 2
+//     // Subscribe the observer to what we just made
+//     // Point the stream to the create intent
+//     .subscribe(subscribingObserver);
+// }
+//
+// // Create new data
+// streamDataToObserver(data, DumplingIntents.observers.create);
+//
+// // Update Data
+// var data = [{fieldName: fieldValue}, game-id];
+// streamDataToObserver(data, DumplingIntents.observers.update);
+//
 
 const observers = {
   "create": Rx.Observer.create(
     (data) => {
       // Step 3
       // If we get some data, make sure it's valid and pass along to subscribers
-      if (typeof data === "object" &&
-        data !== null) {
+      if (typeof data === "object" && data.length !== null) {
         subjects.create.onNext(data);
       }
     },
@@ -74,7 +68,7 @@ const observers = {
             isValidUpdateContent(content)) {
             subjects.update.onNext([content, gameId]);
           } else {
-            console.log("tried to send inadequate arguments to update intent: ", onNextPayload);
+            console.log("tried to send inadequate arguments to update intent: ", onNextPayload); //eslint-disable-line no-console
           }
         } else {
           throw new Error("update intent only accepts a single array");
